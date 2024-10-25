@@ -1,0 +1,142 @@
+Ali Cole AT Java
+Lesson 08 - Intro to Loops
+Part C
+
+---------------------------------------------------------------------------------------------
+
+1: Hand trace the following code (do not write a program) and write down its output.
+    n = 1;
+    while (n < 13){
+        System.out.print(n + " ");
+        n = n + 3;
+    }
+
+    Hand tracing by "steps":
+        Step 1:
+            n is 1, 1 is less than 13, run loop
+            print in terminal 1 
+            n = 1 + 3
+                set n to 4
+        Step 2:
+            n is 4, 4 is less than 13, run loop
+            print in terminal 4 
+            n = 4 + 3
+                sets n to 7
+        Step 3:
+            n is 7, 7 is less than 13, run loop
+            print in terminal 7
+            n = 7 + 3
+                sets n to 10
+        Step 4:
+            n is 10, 10 is less than 13, run loop
+            print in terminal 10
+            n = 10 + 3
+                sets n to 13
+        Step 5:
+            n is 13, 13 is NOT less than 13, break loop.
+    
+    Returns in terminal:
+        1 4 7 10 
+
+---------------------------------------------------------------------------------------------
+
+2: Hand trace the following code (do not write a program) and write down its output.
+    n = 1;
+    while (n < 13){
+        n = n + 3;
+        System.out.print(n + " ");
+    }
+
+    Hand tracing by "steps":
+        Step 1:
+            n is 1, 1 is less than 13, run loop
+            n = 1 + 3
+                sets n to 4
+            print in terminal 4
+        Step 2: 
+            n is 4, 4 is less than 13, run loop
+            n = 4 + 3
+                sets n to 7
+            print in terminal 7
+        Step 3:
+            n is 7, 7 is less than 13, run loop
+            n = 7 + 3
+                sets n to 10
+            print in terminal 10
+        Step 4:
+            n is 10, 10 is less than 13, run loop
+            n = 10 + 3
+                sets n to 13
+            print in terminal 13
+        Step 5:
+            n is 13, 13 is NOT less than 13, break loop
+
+    Returns in terminal:
+        4 7 10 13 
+---------------------------------------------------------------------------------------------
+
+3: Hand trace the following code (do not write a program) and write down its output.
+    for (n = 1; n < 4; n++)
+    {
+        System.out.print(n + " ");
+    }
+
+    Hand tracing by "steps":
+        Step 1:
+            n is 1, 1 is less than 4, run loop
+            print in terminal 1
+            n = 1 + 1
+                sets n to 2
+        Step 2:
+            n is 2, 2 is less than 4, run loop
+            print in terminal 2
+            n = 2 + 1
+                sets n to 3
+        Step 3:
+            n is 3, 3 is less than 4, run loop
+            print in terminal 3
+            n = 3 + 1
+                sets n to 4
+        Step 4: 
+            n is 4, 4 is NOT less than 4, break loop
+    
+    Returns in terminal:
+        1 2 3 
+
+---------------------------------------------------------------------------------------------
+
+4: Hand trace the following code (do not write a program) and write down its output.
+    for (n = 1; n <= 4; n++)
+    {
+        System.out.print(n + " ");
+    }
+
+    Hand tracing by "steps":
+        Step 1:
+            n is 1, 1 is less or equal to 4, run loop
+            print in terminal 1
+            n = 1 + 1
+                sets n to 2
+        Step 2:
+            n is 2, 2 is less than or equal to 4, run loop
+            print in terminal 2
+            n = 2 + 1
+                sets n to 3
+        Step 3:
+            n is 3, 3 is less than or equal to 4, run loop
+            print in terminal 3
+            n = 3 + 1
+                sets n to 4
+        Step 4: 
+            n is 4, 4 is less than or equal to 4, run loop
+            print in terminal 4
+            n = 4 + 1
+                sets n to 5
+        Step 5:
+            n is 5, 5 is NOT less than or equal to 4, break loop
+    
+    Returns in terminal:
+        1 2 3 4 
+
+
+
