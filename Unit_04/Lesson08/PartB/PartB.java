@@ -15,7 +15,7 @@ public class PartB {
         System.out.print("Enter the balance: ");
         Double balance = in.nextDouble();
 
-        // Create table to declare to user
+        // Create table to return to user in standard output
         System.out.println("Year |        Int Earned ($)       |           Balance ($)        ");
         System.out.println("----------------------------------------------------------------------");
         for (int i = 0; i < 5; i++) {
