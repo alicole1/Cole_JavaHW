@@ -1,0 +1,13 @@
+We can find the result of the call mystery(3,2) for the following code:
+
+public static double mystery(double x, double y)
+{
+   double result = (x + y) / (y - x);
+   return result;
+}
+
+By realizing double x is = 3.0, and double y is = 2.0, we can do the following calculations:
+    double result = (3.0+2.0) / (2.0-3.0)
+    double result = 5.0 / -1.0
+    double result = -5.0
+Result will be equal to -5.0
