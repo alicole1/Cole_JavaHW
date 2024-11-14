@@ -1,0 +1,26 @@
+Ali Cole AT Java
+Lesson 12 - Variable Scope
+Part A
+
+Describe the error in the following program and explain how to fix it.
+
+public class Conversation
+{
+   public static void main(String[] args)
+   {
+      Scanner in = new Scanner(System.in);
+      System.out.print("What is your first name? ");
+      String input = in.next();
+      System.out.println("Hello, " + input);
+      System.out.print("How old are you? ");
+      int input = in.nextInt();
+      input++;
+      System.out.println("Next year, you will be " + input);
+   }
+}
+
+I believe that the issue is that a variable with the name input is classified 
+both a String and an int. 
+
+You can fix this by having different variable names for the string and for
+the integer.
