@@ -1,0 +1,16 @@
+// Ali Cole AT Java
+// Unit 06 Lesson 17 - Multidimensional Arrays
+// Part A
+
+part I:
+    int[][] newArray = new int[4][3];
+
+part II:
+    int[][] newArray = new int[2][5];
+
+part III:
+    int[][] newArray = {
+        {8,6,7},
+        {5,3,0},
+    };
+
