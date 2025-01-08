@@ -1,8 +1,5 @@
 // Ali Cole AT Java
 // Unit 5 Project: Card Class
-
-import java.util.Random;
-
 class Card {
     // Create public enums for rank and suit.
     public enum Suit {SPADE, HEART, CLUB, DIAMOND};
@@ -137,17 +134,9 @@ class Card {
     }
 }
 
-class DeckOfCards {
-    Card.Suit currSuit = Card.Suit.CLUB;
-    Card.Rank currRank = Card.Rank.ACE;
-    Card[] deck = new Card[52];
-    for (int i = 0; i<52; i++) {
-        Card card = new Card(currSuit, currRank);
-
-    }
-}
-
 public class blackJack {
+    // METHOD: hit (get a new card).
+
     /*
     public static void main(String[] args) {
         // Construct card object with given rank and suit and display.
