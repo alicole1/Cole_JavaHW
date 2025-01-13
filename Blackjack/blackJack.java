@@ -1,5 +1,7 @@
 // Ali Cole AT Java
 // Unit 5 Project: Card Class
+import java.util.Scanner;
+
 class Card {
     // Create public enums for rank and suit.
     public enum Suit {SPADE, HEART, CLUB, DIAMOND};
@@ -136,7 +138,28 @@ class Card {
 
 public class blackJack {
     // METHOD: hit (get a new card).
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        while (true) { 
+            String userResponse = "";
+            System.out.print("Would you like to play a hand of blackjack? (y/n): ");
+            userResponse = scan.nextLine().toLowerCase();
+            if (userResponse.equals("n")) {
+                System.out.println("Thanks for playing :)");
+                break;
+            }
+            System.out.println("Commencing blackjack play...."); // Troubleshoot
+            System.out.println("Building dealer's hand..."); // Troubleshoot
 
+            System.out.println("Dealers hand built."); // Troubleshoot
+
+
+
+        }
+        System.out.println("Loop broken");
+
+    }
+    
     /*
     public static void main(String[] args) {
         // Construct card object with given rank and suit and display.
