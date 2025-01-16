@@ -26,7 +26,7 @@ public class PartC {
         // We do not need to return the array, as it is passed by reference.
     }
 
-    // METHOD: Finds Average of numbers in an array.
+    // METHOD: Finds lowest of numbers in an array.
     public static double findLowest(ArrayList<Double> temps) {
         double lowest = temps.get(0);
         for (int i = 0; i < temps.size(); i++) {
