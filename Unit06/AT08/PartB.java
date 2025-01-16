@@ -1,3 +1,7 @@
+// Ali Cole
+// AT08 - Using Packages
+// Part B
+
 import java.util.Scanner;
 import org.derryfield.math.Geometry;
 
