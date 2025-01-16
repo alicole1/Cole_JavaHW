@@ -19,9 +19,9 @@ public class PartB {
 
         while (in.hasNext()) {
             Character currentChar = in.next().charAt(0);
-            if (currentChar.isLetter(currentChar) == true) {
+            if (Character.isLetter(currentChar) == true) {
                 letterCount++;
-            } else if (currentChar.isDigit(currentChar) == true) {
+            } else if (Character.isDigit(currentChar) == true) {
                 digitCount++;
             }
             charCount++;
