@@ -1,3 +1,7 @@
+// Ali Cole
+// Lesson 23 - Throwing Exceptions
+// Part A
+
 import java.util.Scanner;
 
 public class PartA {
