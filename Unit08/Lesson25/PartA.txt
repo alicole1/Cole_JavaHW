@@ -1,0 +1,8 @@
+// Ali Cole
+// Lesson 25 - Creating and Using Classes
+// Part A
+
+Output of the code:
+Total = $4.50
+You have 2 items.
+Total = $4.50

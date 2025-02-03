@@ -1,0 +1,26 @@
+// Ali Cole
+// Lesson 26 - Static Variables and Methods
+// Part C
+
+What is the output of the following code and why?
+
+What is the output of the following code and why?
+   public static void main(String[] args) {
+       Customer.lastSerialUsed = 100;
+       Customer c1 = new Customer("Sal's Deli");
+       c1.addSale(100);
+       Customer c2 = c1;
+       c2.addSale(50);
+       System.out.println(c1.getSales());
+       System.out.println(c2.getSales());
+   }
+
+(Use the Customer class we developed in class).
+
+ANSWER: 
+The output of the above program is 
+    150
+    150
+This is because in line 12, c1 is set to c2. As both are now referencing the same object,
+any changes to one will be made to both.
+

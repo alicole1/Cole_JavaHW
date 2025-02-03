@@ -1,0 +1,35 @@
+// Ali Cole
+// Lesson 26 - Static Variables and Methods
+// Part B
+
+What is the output of the following program (and why?)
+
+class Item { // new class
+   private int value; 
+   public void setValue(int value) {
+       value = value;
+   }
+   public int getValue() {
+       return value;
+   }
+}
+
+public class ThisDemo {
+   public static void main(String[] args) {
+       Item myItem = new Item();
+       System.out.print(myItem.getValue() + " | ");
+       myItem.setValue(13);
+       System.out.println(myItem.getValue());
+   }
+}
+
+
+ANSWER:
+The output of the above program is 0 | 0
+This is because in line 6, the variable "value" is set to "value"
+This line, and therefore, method, changes nothing, as the two variable names are the same.
+To fix the program, change the method setValue() to:
+
+   public void setValue(int input) {
+       value = input;
+   }
