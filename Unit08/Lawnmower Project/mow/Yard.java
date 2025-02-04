@@ -31,14 +31,14 @@ public class Yard {
 
             // Check to remove one block of grass.
             System.out.println("Does changeValueAt() work?");
-            System.out.printf("Mow grass at 0,0...%n%n");
-            myYard.changeValueAt(0, 0, ' ');
+            System.out.printf("Mow grass at 1,1...%n%n");
+            myYard.changeValueAt(1, 1, ' ');
             System.out.printf("Newly mowed yard: %n");
             myYard.printYard();
 
             // Check to see if get value updates correct.
             System.out.printf("%nDoes getValueAt() update?%n");
-            System.out.println("New value of grass at 0, 0: " + myYard.getValueAt(0, 0));
+            System.out.println("New value of grass at 1, 1: " + myYard.getValueAt(1, 1));
 
             // Check if you can get height and width.
             System.out.printf("%nDo getHeight() and getWidth() work correctly? %n");
@@ -47,7 +47,7 @@ public class Yard {
 
             // Check if change value at works at extremes.
             System.out.printf("%nWill changeValueAt() still work in bottom right?%n");
-            myYard.changeValueAt(myYard.getHeight() - 1, myYard.getWidth() - 1, ' ');
+            myYard.changeValueAt(myYard.getHeight(), myYard.getWidth(), ' ');
             System.out.println("Newly mowed yard:");
             myYard.printYard();
 
@@ -58,7 +58,7 @@ public class Yard {
     // ALL OTHER YARD VARIABLES AND METHODS.
 
     // Define variables.
-    public char[][] yard;
+    private char[][] yard;
     private static int yardHeight;
     private static int yardWidth;
 
@@ -99,21 +99,21 @@ public class Yard {
 
     /**
      * Return the character value at a specified height and width within yard. (does
-     * not include bricks, ei (0,0) is top left, (height-1,width-1) is bottom
-     * right).
+     * include bricks, ei (1,1) is top left of grass, (height,width) is bottom
+     * right of grass).
      */
     public char getValueAt(int heightVal, int widthVal) {
-        char currVal = yard[heightVal + 1][widthVal + 1];
+        char currVal = yard[heightVal][widthVal];
         return currVal;
     }
 
     /**
      * Change the character value to a new specified value at a specified height and
-     * width within yard. (does not include bricks ei (0,0) is top left,
-     * (height-1,width-1) is bottom right).
+     * width within yard. (does include bricks ei (1,1) is top left of grass,
+     * (height,width) is bottom right of grass).
      */
     public void changeValueAt(int heightVal, int widthVal, char newVal) {
-        yard[heightVal + 1][widthVal + 1] = newVal;
+        yard[heightVal][widthVal] = newVal;
     }
 
     /** Return height of yard (does not include bricks). */
