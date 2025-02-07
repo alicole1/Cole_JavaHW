@@ -17,7 +17,7 @@ public class Yard {
 
         // Using collected user input, create and display yard.
         Yard myYard = new Yard(height, width);
-        myYard.printYard();
+        // myYard.printYard();
         System.out.println();
 
         // TESTING: Only for troubleshooting. Checking to make sure all methods work.
@@ -34,7 +34,7 @@ public class Yard {
             System.out.printf("Mow grass at 1,1...%n%n");
             myYard.changeValueAt(1, 1, ' ');
             System.out.printf("Newly mowed yard: %n");
-            myYard.printYard();
+            // myYard.printYard();
 
             // Check to see if get value updates correct.
             System.out.printf("%nDoes getValueAt() update?%n");
@@ -49,7 +49,7 @@ public class Yard {
             System.out.printf("%nWill changeValueAt() still work in bottom right?%n");
             myYard.changeValueAt(myYard.getHeight(), myYard.getWidth(), ' ');
             System.out.println("Newly mowed yard:");
-            myYard.printYard();
+            // myYard.printYard();
 
         }
 
@@ -127,12 +127,33 @@ public class Yard {
     }
 
     /** Prints current yard in terminal. */
-    public void printYard() {
+    public void printYard(Mower lm) {
         for (int i = 0; i < yardHeight; i++) {
             for (int j = 0; j < yardWidth; j++) {
                 System.out.print(yard[i][j]);
             }
             System.out.println();
+
+            char arrow = ' ';
+            switch (lm.getCurrDirection()) {
+                case 0:
+                    arrow = '^';
+                    break;
+                case 1:
+                    arrow = '>';
+                    break;
+                case 2:
+                    arrow = 'v';
+                    break;
+                case 3:
+                    arrow = '<';
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+
+            changeValueAt(lm.getCurrRow(), lm.getCurrColumn(), arrow);
+
         }
     }
 
