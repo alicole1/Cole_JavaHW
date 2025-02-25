@@ -1,4 +1,6 @@
 
+import java.util.Random;
+
 public class Mower {
 
     // Define variables.
@@ -116,5 +118,27 @@ public class Mower {
      */
     public void cutGrass() {
         yard.changeValueAt(currRow, currColumn, ' ');
+    }
+
+    public void startPos(Yard workingYard) {
+        int maxHeight = workingYard.getHeight() + 1;
+        int maxWidth = workingYard.getWidth() - 1;
+        Random r = new Random();
+        int randPos = r.nextInt(4) - 1;
+        if (randPos == 1) {
+            setCurrRow(1);
+            setCurrColumn(1);
+        } else if (randPos == 2) {
+            setCurrRow(1);
+            setCurrColumn(maxHeight);
+        } else if (randPos == 3) {
+            setCurrRow(maxWidth);
+            setCurrColumn(1);
+        } else if (randPos == 4) {
+            setCurrRow(maxWidth);
+            setCurrColumn(maxHeight);
+        }
+        int randDirection = r.nextInt(3);
+        setCurrDirection(randDirection);
     }
 }

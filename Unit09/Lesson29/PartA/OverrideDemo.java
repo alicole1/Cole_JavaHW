@@ -18,9 +18,10 @@ public class OverrideDemo {
 
         GearedBicycle stevesBicycle = new GearedBicycle();
         System.out.printf("%nGeared bike:%n");
+        stevesBicycle.display();
+
         // pedal with geared bike.
         stevesBicycle.shiftUp();
-        stevesBicycle.pedal();
         stevesBicycle.pedal();
         stevesBicycle.display();
 
