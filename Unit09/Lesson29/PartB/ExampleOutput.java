@@ -1,3 +1,7 @@
+// Ali Cole
+// Lesson 29 - Overriding Methods
+// Part B
+
 public class ExampleOutput {
     public static void main(String[] args) {
         Employee ed = new Employee("Ed", 50000.00);

@@ -1,3 +1,7 @@
+// Ali Cole
+// Lesson 29 - Overriding Methods
+// Part B
+
 public class Manager extends Employee {
     private double bonus;
 
@@ -10,5 +14,13 @@ public class Manager extends Employee {
     public double getAnnualIncome() {
         double income = super.getAnnualIncome() + bonus;
         return income;
+    }
+
+    public void setBonus(double bonus) {
+        this.bonus = bonus;
+    }
+
+    public double getBonus() {
+        return bonus;
     }
 }
