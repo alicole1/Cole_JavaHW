@@ -1,3 +1,6 @@
+// Ali Cole
+// Lawnmower Project
+// Yard Class
 
 import java.util.Scanner;
 

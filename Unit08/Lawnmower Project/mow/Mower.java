@@ -1,3 +1,6 @@
+// Ali Cole
+// Lawnmower Project
+// Mower Class
 
 import java.util.Random;
 
@@ -45,19 +48,17 @@ public class Mower {
     }
 
     public void turnRight() {
-        setCurrDirection(1);
+        setCurrDirection(getCurrDirection() + 1);
+        if (getCurrDirection() > 3) {
+            setCurrDirection(0);
+        }
     }
 
     public void turnLeft() {
-        setCurrDirection(3);
-    }
-
-    public void turnUp() {
-        setCurrDirection(0);
-    }
-
-    public void turnDown() {
-        setCurrDirection(2);
+        setCurrDirection(getCurrDirection() - 1);
+        if (getCurrDirection() < 0) {
+            setCurrDirection(3);
+        }
     }
 
     /** Move mower forward by one unit */
@@ -125,20 +126,33 @@ public class Mower {
         int maxWidth = workingYard.getWidth() - 1;
         Random r = new Random();
         int randPos = r.nextInt(4) - 1;
-        if (randPos == 1) {
+        if (randPos == 1) { // top left
             setCurrRow(1);
             setCurrColumn(1);
-        } else if (randPos == 2) {
+        } else if (randPos == 2) { // top right
             setCurrRow(1);
             setCurrColumn(maxHeight);
-        } else if (randPos == 3) {
+        } else if (randPos == 3) { // bottom left
             setCurrRow(maxWidth);
             setCurrColumn(1);
-        } else if (randPos == 4) {
+        } else if (randPos == 4) { // bottom right
             setCurrRow(maxWidth);
             setCurrColumn(maxHeight);
         }
-        int randDirection = r.nextInt(3);
+        int randDirection = r.nextInt(3); // randomize direction
         setCurrDirection(randDirection);
+    }
+
+    public boolean updateMower(Yard workingYard) {
+        for (int i = 0; i < 4; i++) {
+            if (seeNext() == '+') {
+                cutGrass();
+                moveNext();
+                return true;
+            } else {
+                turnRight();
+            }
+        }
+        return false;
     }
 }

@@ -1,74 +1,86 @@
+// Ali Cole
+// Lawnmower Project
+// Demo
+
+import java.util.Scanner;
 
 public class Demo {
     public static void main(String[] args) {
+        String ascii = "                                                 .--.%n" + //
+                "                                                /-.  \\%n" + //
+                "                                               < ^ `D/%n" + //
+                "                                                \\_  (%n" + //
+                "                                                  )_/;.%n" + //
+                "                                              _ __|_, \\\\%n" + //
+                "                                            ,(_I_______)\\%n" + //
+                "                                           //`-----\\     \\%n" + //
+                "                                          //        \\____/\\%n" + //
+                "                                         //         /     /%n" + //
+                "                                        // _____   /  /\\  \\%n" + //
+                "                            .---n-.    //'`     `\\/  /  \\  \\%n" + //
+                "                       _____|_\"_~_|___//         /\\  \\   \\  \\%n" + //
+                "                      / /  \\      /  \\ `\\__...--' _\\__\\   \\_/\\%n" + //
+                "          \\\\\\\\\\\\\\\\\\\\\\\\'-\\__/--===-\\__/-'`,,,,,,,,(____\\,,,(__/,,,,,,,,,,,,,,,%n" + //
+                "          \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\%n";
+
+        boolean isMowable = true;
+        int speed = 1000;
         clearScreen();
-        Yard thisYard = new Yard(4, 5);
+
+        System.out.printf(ascii);
+
+        Scanner in = new Scanner(System.in);
+        System.out.printf("%nWelcome to lawnmower! Input any button to continue: ");
+        in.nextLine();
+
+        clearScreen();
+        System.out.print("Enter the height of the yard: ");
+        int height = in.nextInt();
+        System.out.print("Enter the width of the yard: ");
+        int width = in.nextInt();
+        clearScreen();
+
+        System.out.printf("On a scale of 1-5, how patient are you? %n1 (very patient) %n5 (very impatient): ");
+        int patience = in.nextInt();
+
+        if (patience == 1) {
+            speed = 1000;
+        } else if (patience == 2) {
+            speed = 500;
+        } else if (patience == 3) {
+            speed = 100;
+        } else if (patience == 4) {
+            speed = 75;
+        } else if (patience == 5) {
+            speed = 25;
+        }
+
+        Yard thisYard = new Yard(height, width);
         Mower myMow = new Mower(thisYard);
 
-        myMow.startPos(thisYard);
-        thisYard.printYard(myMow);
-        myMow.startPos(thisYard);
-        thisYard.printYard(myMow);
-        myMow.startPos(thisYard);
-        thisYard.printYard(myMow);
+        while (isMowable == true) {
+            isMowable = myMow.updateMower(thisYard);
+            thisYard.printYard(myMow);
+            delay(speed);
+            clearScreen();
+        }
 
-        return;
-
-        // // Collect user input.
-        // Scanner in = new Scanner(System.in);
-        // System.out.print("Enter the height of the yard: ");
-        // int height = in.nextInt();
-        // System.out.print("Enter the width of the yard: ");
-        // int width = in.nextInt();
-        // clearScreen();
-
-        // // Using collected user input, create and display yard.
-        // Yard myYard = new Yard(height, width);
-
-        // // Used to test if lawnmower still works in different directions.
-        // // User specifies where to start lawnmower and the direction.
-        // System.out.print("Enter the row you want the lawnmower to start with (1 being
-        // top of the lawn) ");
-        // int lmStartRow = in.nextInt();
-        // System.out.print("Enter the column you want the lawnmower to start with (1
-        // being left of the lawn) ");
-        // int lmStartColumn = in.nextInt();
-        // System.out.print("What direction do you want the lawnmower to go? (l)eft,
-        // (r)ight, (u)p, or (d)own? ");
-        // String lmStartDir = in.next().toLowerCase();
-        // clearScreen();
-
-        // // Creates the lawnmower and sets start position and dirrection to user
-        // // specified vars
-        // Mower lm = new Mower(myYard);
-        // lm.setCurrRow(lmStartRow);
-        // lm.setCurrColumn(lmStartColumn);
-        // if (lmStartDir.equals("l")) {
-        // lm.turnLeft();
-        // } else if (lmStartDir.equals("r")) {
-        // lm.turnRight();
-        // } else if (lmStartDir.equals("d")) {
-        // lm.turnDown();
-        // } else if (lmStartDir.equals("u")) {
-        // lm.turnUp();
-        // }
-
-        // // Print the yard.
-        // myYard.printYard(lm);
-        // System.out.println();
-        // delay(1000);
-
-        // // Loop through cutting grass until lawnmower gets to end of yard.
-        // while (lm.seeNext() != ('R')) {
-        // clearScreen();
-        // lm.cutGrass();
-        // lm.moveNext();
-        // myYard.printYard(lm);
-        // delay(400);
-        // }
-
-        // // Waits 5 seconds.
-        // delay(5000);
+        System.out.print("Your lawn is mowed! ");
+        delay(2500);
+        System.out.println("");
+        for (int i = 0; i < 3; i++) {
+            System.out.print(". ");
+            delay(150);
+        }
+        System.out.print("has been mown? ");
+        delay(2500);
+        System.out.println("");
+        for (int i = 0; i < 3; i++) {
+            System.out.print(". ");
+            delay(150);
+        }
+        System.out.print("either way, your lawn looks good now :) ");
+        delay(5000);
     }
 
     /** Clears screen */
