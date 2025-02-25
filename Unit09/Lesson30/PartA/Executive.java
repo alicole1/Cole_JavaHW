@@ -22,6 +22,6 @@ public class Executive extends Manager {
     @Override
     public void displayInfo() {
         super.displayInfo();
-        System.out.printf("  Shares  = $%,12.2f%n", shares);
+        System.out.printf("  Shares = $%,12.2f%n", shares);
     }
 }
