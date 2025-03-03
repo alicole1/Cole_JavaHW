@@ -39,8 +39,8 @@ public class Board extends JPanel {
         af.translate(x_t, y_t);
 
         double theta = Math.toRadians(22.5);
-        double anchorx = x_t + SIDELENGTH / 2;
-        double anchory = y_t + SIDELENGTH / 2;
+        double anchorx = SIDELENGTH / 2;
+        double anchory = SIDELENGTH / 2;
 
         af.rotate(theta, anchorx, anchory);
 
@@ -48,12 +48,9 @@ public class Board extends JPanel {
         g2d.setColor(Color.MAGENTA);
         g2d.fill(shape);
 
-        g2d.setColor(Color.BLACK);
-        g2d.fillOval((int) anchorx, (int) anchory, 3, 3);
-
         // send a little message.
         g2d.setColor(Color.BLUE);
-        g2d.drawString("<333", 50, 50);
+        g2d.drawString("This is a little message!", 50, 50);
     }
 
 }
