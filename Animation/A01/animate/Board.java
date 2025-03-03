@@ -50,7 +50,7 @@ public class Board extends JPanel {
 
         // send a little message.
         g2d.setColor(Color.BLUE);
-        g2d.drawString("This is a little message!", 50, 50);
+        g2d.drawString("Hello World!", 50, 50);
     }
 
 }
