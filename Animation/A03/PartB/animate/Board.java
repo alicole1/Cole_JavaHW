@@ -19,6 +19,7 @@ public class Board extends JPanel {
     private final int B_HEIGHT = 720;
     private BufferedImage img;
     private SoundClip boing = new SoundClip("PartB/media/boing.wav");
+    private SoundClip sitar = new SoundClip("PartB/media/sitar.wav");
 
     private int x = 0;
     private int y = 0;
@@ -53,6 +54,9 @@ public class Board extends JPanel {
         }
 
         boing.open();
+        sitar.open();
+        sitar.setLoop(true);
+        sitar.play();
 
         x = B_WIDTH / 2 - img.getWidth() / 2;
         y = B_HEIGHT / 2 - img.getHeight() / 2;
@@ -94,14 +98,12 @@ public class Board extends JPanel {
             x += xSpeed;
             if (x > (B_WIDTH - img.getWidth()) || x < 0) {
                 xSpeed = xSpeed * -1;
-                boing.setLoop(true);
                 boing.play();
             }
 
             y += ySpeed;
             if (y > (B_HEIGHT - img.getHeight()) || y < 0) {
                 ySpeed = ySpeed * -1;
-                boing.setLoop(true);
                 boing.play();
             }
 

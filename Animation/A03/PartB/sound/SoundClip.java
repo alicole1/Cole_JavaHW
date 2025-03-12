@@ -53,7 +53,6 @@ public class SoundClip {
     }
 
     public void play() {
-        boolean quit = false;
 
         // implement method here.
         if (clip != null) {
@@ -70,13 +69,13 @@ public class SoundClip {
 
             // start at the beginning of the clip
             clip.setFramePosition(0);
-            clip.start();
 
+            if (loop) {
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+            } else {
+                clip.start();
+            }
         }
-    }
-
-    private void loop() {
-
     }
 
     public void play(boolean wait) {
