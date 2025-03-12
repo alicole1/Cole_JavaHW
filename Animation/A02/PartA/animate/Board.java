@@ -21,11 +21,11 @@ public class Board extends JPanel {
     public Board() {
         // set background color of the board and default size.
         setBackground(Color.CYAN);
-        setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
+        // setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
 
         // attempt to load the image
         try {
-            File imageFile = new File("Cotton_Candy_Ice_Cream.png");
+            File imageFile = new File("PartA/Cotton_Candy_Ice_Cream.png");
             img = ImageIO.read(imageFile);
             setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
         } catch (Exception e) {
@@ -39,14 +39,11 @@ public class Board extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         AffineTransform affineTransform = new AffineTransform();
         int x_t = 0, y_t = 0;
-        int x_scaled = 0, y_scaled = 0;
-        double scale = 1;
+        double scale = .5;
         if (img != null) {
             x_t = this.getWidth() / 2;
-            x_scaled = (int) ((img.getWidth() * scale) / 2.0);
             y_t = this.getHeight() / 2;
-            y_scaled = (int) ((img.getHeight() * scale) / 2.0);
-            affineTransform.translate(x_t - x_scaled, y_t - y_scaled);
+            affineTransform.translate(x_t, y_t);
             affineTransform.scale(scale, scale);
             g2d.drawImage(img, affineTransform, null);
         } else {

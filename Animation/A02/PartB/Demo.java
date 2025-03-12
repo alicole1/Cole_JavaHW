@@ -1,8 +1,8 @@
-package PartA;
+package PartB;
 
 import java.awt.EventQueue;
 
-import PartA.animate.Application;
+import PartB.animate.Application;
 
 public class Demo {
     public static void main(String[] args) {

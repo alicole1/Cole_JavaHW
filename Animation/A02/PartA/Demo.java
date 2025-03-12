@@ -1,8 +1,7 @@
 package PartA;
 
-import java.awt.EventQueue;
-
 import PartA.animate.Application;
+import java.awt.EventQueue;
 
 public class Demo {
     public static void main(String[] args) {
@@ -18,6 +17,5 @@ public class Demo {
             Application myApp = new Application("You did it!");
             myApp.setVisible(true);
         });
-
     }
 }
