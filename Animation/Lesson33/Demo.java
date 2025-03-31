@@ -1,3 +1,7 @@
+// Ali Cole
+// Lesson 33 - Creating an Interface
+// Part B
+
 public class Demo {
     public static void main(String[] args) {
         Animal elephant = new Animal("Tank", 10000);
