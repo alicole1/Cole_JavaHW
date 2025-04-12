@@ -1,4 +1,3 @@
-
 package animate;
 
 import javax.swing.JFrame;

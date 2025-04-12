@@ -15,6 +15,13 @@ public class Board extends JPanel implements KeyListener {
 
     private final int FLOOR = B_HEIGHT - 25;
 
+    private Cannon cannon = new Cannon();
+
+    private double velocityX = cannon.getMuzzleVelocity() * Math.cos(Math.toRadians(cannon.getAngle()));
+    private double velocityY = cannon.getMuzzleVelocity() * Math.sin(Math.toRadians(cannon.getAngle()));
+    private double ballX;
+    private double ballY;
+
     /*
      * Constructor
      */
@@ -41,6 +48,10 @@ public class Board extends JPanel implements KeyListener {
         g2d.fillRect(0, FLOOR + 1, B_WIDTH, FLOOR);
         // AffineTransform af = new AffineTransform();
 
+        cannon.setXPos(60);
+        cannon.setYPos(B_HEIGHT - 60);
+        cannon.draw(g);
+
     }
 
     @Override
@@ -48,14 +59,19 @@ public class Board extends JPanel implements KeyListener {
         // was the space key pressed?
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             System.out.println("Spacebar was pressed.");
+            cannon.fire();
         }
 
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            cannon.rotateCounterClockwise();
             System.out.println("Left arrow was pressed.");
+            this.repaint();
         }
 
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            cannon.rotateClockWise();
             System.out.println("Right arrow was pressed.");
+            this.repaint();
         }
 
         if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -84,6 +100,9 @@ public class Board extends JPanel implements KeyListener {
          */
         @Override
         public void run() {
+            ballX = ballX + velocityX;
+            ballY = ballY + velocityY;
+
             repaint();
         }
     }
