@@ -29,11 +29,31 @@ public class Client {
                         new InputStreamReader(echoSocket.getInputStream()));
                 BufferedReader stdIn = new BufferedReader(
                         new InputStreamReader(System.in))) {
+            // --- WELCOME ---
+            // Send server connection message, collect username.
+            System.out.println("Connected to server " + hostName + " on port " + portNumber);
+            System.out.print(in.readLine()); // What is your username?
+            out.println(stdIn.readLine());
+            System.out.println(in.readLine()); // __ has joined the chat.
 
+            Thread serverListener = new Thread(() -> {
+                try {
+                    String serverMessage;
+                    while ((serverMessage = in.readLine()) != null) {
+                        System.out.println(serverMessage);
+                    }
+                } catch (IOException e) {
+
+                }
+            });
+            // serverListener.setDaemon(true);
+            serverListener.start();
+
+            // MAIN LOOP
             String userInput;
             while ((userInput = stdIn.readLine()) != null) {
                 out.println(userInput);
-                System.out.println(in.readLine());
+                // System.out.println(in.readLine());
             }
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host " + hostName);

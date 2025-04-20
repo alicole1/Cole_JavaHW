@@ -4,8 +4,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class MultiServer {
+    static ArrayList<ClientHandler> handlers = new ArrayList<>();
+
     public static void main(String[] args) {
         // parse input arguments for port.
         int port = 8675;
@@ -20,7 +23,7 @@ public class MultiServer {
         System.out.printf("port: %d%n", port);
 
         try (ServerSocket serverSocket = new ServerSocket(port);) {
-            System.out.println("Multi echo server listening on port " + port);
+            System.out.println("Server is listening on port " + port);
             while (true) {
                 try {
                     Socket clientSocket = serverSocket.accept(); // Accept incoming client connection
@@ -28,6 +31,7 @@ public class MultiServer {
                     // Create a new thread to handle the client
                     ClientHandler clientHandler = new ClientHandler(clientSocket);
                     new Thread(clientHandler).start();
+                    handlers.add(clientHandler);
                 } catch (IOException e) {
                     System.err.println("Error accepting client connection: " + e.getMessage());
                 }
@@ -38,10 +42,23 @@ public class MultiServer {
             System.out.println(e.getMessage());
         }
     }
+
+    public static void broadcast(String message, boolean toServer) {
+        for (int i = 0; i < handlers.size(); i++) {
+            // send message to each client to print.
+            handlers.get(i).sendMessage(message);
+        }
+        if (toServer == true) {
+            System.out.println(message);
+        }
+    }
 }
 
 class ClientHandler implements Runnable {
     private Socket clientSocket;
+    private PrintWriter out;
+    private BufferedReader in;
+    String username;
 
     public ClientHandler(Socket socket) {
         this.clientSocket = socket;
@@ -50,22 +67,32 @@ class ClientHandler implements Runnable {
     @Override
     public void run() {
         // use try with catch statement to create output and input streams.
-        try (PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));) {
+        try {
+            out = new PrintWriter(clientSocket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             System.out.println("Connected to client " + clientSocket.getInetAddress().getHostAddress()
                     + " on port " + clientSocket.getPort());
-
+            out.println("What is your username? ");
+            username = in.readLine();
+            System.out.printf("Client %s is using the name \"%s\" %n", clientSocket.getInetAddress().getHostAddress(),
+                    username);
+            MultiServer.broadcast(username + " has joined the chat server!", false);
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
-                // display info about what was received.
-                System.out.printf("Received from client (%s): %s%n",
-                        clientSocket.getInetAddress().getHostAddress(), inputLine);
-                out.println(inputLine);
+                MultiServer.broadcast(username + ": " + inputLine, true);
+
             }
         } catch (IOException e) {
             System.err.println("Error handling client: " + e.getMessage());
         }
 
-        System.out.println("Client disconnected.");
+        MultiServer.handlers.remove(this);
+        MultiServer.broadcast(username + " has left the chat.", false);
+        System.out.printf("Client disconnected: %s (%s)%n", clientSocket.getInetAddress().getHostAddress(), username);
     }
+
+    public void sendMessage(String message) {
+        out.println(message);
+    }
+
 }
