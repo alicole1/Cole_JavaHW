@@ -18,6 +18,9 @@ class Cannon {
     double angle;
     private double muzzleVelocity;
     private int rotationFactor = 1; // changes how easy it is (how fast it is) to rotate cannon.
+    private final double HYPOT = 100;
+
+    Cannonball cannonball = new Cannonball(1, -1, 0);
 
     enum State {
         POSITIONING,
@@ -82,6 +85,16 @@ class Cannon {
     // sets y position of the ANCHOR.
     public void setYPos(int y_position) {
         this.y_position = y_position;
+    }
+
+    public double startCannonBallXPos() {
+        double offset = Math.cos(Math.toRadians(angle)) * HYPOT;
+        return x_position + offset;
+    }
+
+    public double startCannonBallYPos() {
+        double offset = Math.sin(Math.toRadians(angle)) * HYPOT;
+        return y_position - offset;
     }
 
     public void draw(Graphics g) {

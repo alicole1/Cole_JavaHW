@@ -16,11 +16,12 @@ public class Board extends JPanel implements KeyListener {
     private final int FLOOR = B_HEIGHT - 25;
 
     private Cannon cannon = new Cannon();
+    Cannonball ball = new Cannonball(1, -1, FLOOR);
 
-    private double velocityX = cannon.getMuzzleVelocity() * Math.cos(Math.toRadians(cannon.getAngle()));
-    private double velocityY = cannon.getMuzzleVelocity() * Math.sin(Math.toRadians(cannon.getAngle()));
-    private double ballX;
-    private double ballY;
+    double velocityX = cannon.getMuzzleVelocity() * Math.cos(Math.toRadians(cannon.getAngle()));
+    double velocityY = cannon.getMuzzleVelocity() * Math.sin(Math.toRadians(cannon.getAngle()));
+    double ballStartX = cannon.startCannonBallXPos();
+    double ballStartY = cannon.startCannonBallYPos();
 
     /*
      * Constructor
@@ -32,6 +33,11 @@ public class Board extends JPanel implements KeyListener {
 
         this.setFocusable(true);
         this.addKeyListener(this);
+
+        ball.setX(ballStartX);
+        ball.setY(ballStartY);
+        ball.setVX(velocityX);
+        ball.setVY(velocityY);
 
     }
 
@@ -100,8 +106,6 @@ public class Board extends JPanel implements KeyListener {
          */
         @Override
         public void run() {
-            ballX = ballX + velocityX;
-            ballY = ballY + velocityY;
 
             repaint();
         }
