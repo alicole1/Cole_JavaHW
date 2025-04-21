@@ -16,7 +16,7 @@ class Cannon {
     private double x_position;
     private double y_position;
     double angle;
-    private double muzzleVelocity;
+    private double muzzleVelocity = 100;
     private int rotationFactor = 1; // changes how easy it is (how fast it is) to rotate cannon.
     private final double HYPOT = 100;
 
@@ -77,7 +77,7 @@ class Cannon {
         double offsetY = Math.sin(Math.toRadians(angle)) * HYPOT;
         double velocityX = Math.cos(Math.toRadians(angle)) * muzzleVelocity;
         double velocityY = Math.sin(Math.toRadians(angle)) * muzzleVelocity;
-        cannonball.launch(x_position + offsetX, y_position - offsetY, velocityX, velocityY);
+        cannonball.launch(x_position + offsetX, y_position + offsetY, velocityX, velocityY);
     }
 
     // sets x position of the ANCHOR.
@@ -88,16 +88,6 @@ class Cannon {
     // sets y position of the ANCHOR.
     public void setYPos(int y_position) {
         this.y_position = y_position;
-    }
-
-    public double startCannonBallXPos() {
-        double offset = Math.cos(Math.toRadians(angle)) * HYPOT;
-        return x_position + offset;
-    }
-
-    public double startCannonBallYPos() {
-        double offset = Math.sin(Math.toRadians(angle)) * HYPOT;
-        return y_position - offset;
     }
 
     public void draw(Graphics g) {

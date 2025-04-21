@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JPanel;
 
@@ -15,13 +16,12 @@ public class Board extends JPanel implements KeyListener {
 
     private final int FLOOR = B_HEIGHT - 25;
 
-    private Cannon cannon = new Cannon();
-    Cannonball ball = new Cannonball(1, -1, FLOOR);
+    private Timer timer;
+    private final int INITIAL_DELAY = 100;
+    private final int PERIOD_INTERVAL = 25;
 
-    double velocityX = cannon.getMuzzleVelocity() * Math.cos(Math.toRadians(cannon.getAngle()));
-    double velocityY = cannon.getMuzzleVelocity() * Math.sin(Math.toRadians(cannon.getAngle()));
-    double ballStartX = cannon.startCannonBallXPos();
-    double ballStartY = cannon.startCannonBallYPos();
+    private Cannon cannon = new Cannon();
+    Cannonball ball = new Cannonball(1, 1, FLOOR);
 
     /*
      * Constructor
@@ -34,10 +34,9 @@ public class Board extends JPanel implements KeyListener {
         this.setFocusable(true);
         this.addKeyListener(this);
 
-        ball.setX(ballStartX);
-        ball.setY(ballStartY);
-        ball.setVX(velocityX);
-        ball.setVY(velocityY);
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new ScheduledUpdate(),
+                INITIAL_DELAY, PERIOD_INTERVAL);
 
     }
 
@@ -66,6 +65,7 @@ public class Board extends JPanel implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             System.out.println("Spacebar was pressed.");
             cannon.fire(ball);
+            this.repaint();
         }
 
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
