@@ -1,11 +1,13 @@
 package animate;
 
+import animate.Cannonball.STATE;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JPanel;
@@ -27,6 +29,7 @@ public class Board extends JPanel implements KeyListener {
      * Constructor
      */
     public Board() {
+        balls = new ArrayList<>();
         // set background color of the board and default size.
         setBackground(Color.CYAN);
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
@@ -60,15 +63,20 @@ public class Board extends JPanel implements KeyListener {
         // AffineTransform af = new AffineTransform();
 
         cannon.draw(g);
-        ball.draw(g2d);
+        for (Cannonball b : balls)
+            b.draw(g2d);
     }
+
+    ArrayList<Cannonball> balls;
 
     @Override
     public void keyPressed(KeyEvent e) {
         // was the space key pressed?
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             System.out.println("Spacebar was pressed.");
-            cannon.fire(ball);
+            Cannonball b = new Cannonball(0, 1, FLOOR);
+            balls.add(b);
+            cannon.fire(b);
             this.repaint();
         }
 
@@ -110,7 +118,13 @@ public class Board extends JPanel implements KeyListener {
          */
         @Override
         public void run() {
-            ball.updateBall();
+            for (int i = 0; i < balls.size(); i++) {
+                balls.get(i).updateBall();
+                if (balls.get(i).getState() == STATE.TOCLEANUP) {
+                    balls.remove(i);
+                    i--;
+                }
+            }
             repaint();
         }
     }

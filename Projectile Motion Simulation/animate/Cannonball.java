@@ -2,6 +2,7 @@ package animate;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -10,7 +11,8 @@ public class Cannonball {
     public enum STATE {
         IDLE,
         FLYING,
-        EXPLODING
+        EXPLODING,
+        TOCLEANUP,
     }
 
     BufferedImage img;
@@ -30,6 +32,8 @@ public class Cannonball {
     final int G_BOARD = 1; // acceleration due to gravity in pixels per timer interval ^ 2
     final int MUZZLE_VELOCITY = 37; // pixels per timer interval
 
+    int explodedForFrames = 0;
+
     public Cannonball(double ax, double ay, double ground) {
         // public constructor for CannonBall class.
         // takes the acceleration rates (x and y) and the location of the ground (as a
@@ -39,12 +43,14 @@ public class Cannonball {
         this.ay = ay;
         this.ground = ground;
         timeScale = 1;
+
+        img = loadImage("media/flame02.png");
     }
 
     private BufferedImage loadImage(String path) {
         // loads a buffered image (for the flame animation).
         try {
-            File imageFile = new File("path");
+            File imageFile = new File(path);
             img = ImageIO.read(imageFile);
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -62,14 +68,18 @@ public class Cannonball {
      * (since we assume the ball is hidden inside the cannon).
      */
     public void draw(Graphics2D g2d) {
-        g2d.setColor(Color.RED);
-        g2d.fillOval((int) x - 10, (int) y - 10, 20, 20);
-        // if (currState == STATE.FLYING) {
-
-        // } else if (currState == STATE.EXPLODING) {
-        // g2d.translate(x, ground);
-        // g2d.drawImage(img, null, null);
-        // }
+        if (currState == STATE.FLYING) {
+            g2d.setColor(Color.RED);
+            g2d.fillOval((int) x - 10, (int) y - 10, 20, 20);
+        } else if (currState == STATE.EXPLODING) {
+            AffineTransform af = new AffineTransform();
+            af.translate(x - img.getWidth() / 2, ground - img.getHeight() / 2);
+            g2d.drawImage(img, af, null);
+            explodedForFrames++;
+            if (explodedForFrames > 60) {
+                currState = STATE.TOCLEANUP;
+            }
+        }
     }
 
     /*
@@ -83,16 +93,16 @@ public class Cannonball {
      * in case the user wants to slow down the animation.
      */
     public void updateBall() {
-        if (y > ground) {
-            currState = STATE.EXPLODING;
-            System.out.println(currState);
-        } else if (currState == STATE.FLYING) {
+        if (currState == STATE.FLYING) {
             x = x + (vx / timeScale);
             System.out.println("x = " + x);
             vy = vy + (ay / timeScale);
             System.out.println("vy = " + vy);
             y = y + (vy / timeScale);
             System.out.println("y = " + y);
+            if (y > ground) {
+                currState = STATE.EXPLODING;
+            }
         }
     }
 

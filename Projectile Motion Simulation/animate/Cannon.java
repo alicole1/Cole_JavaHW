@@ -99,22 +99,29 @@ class Cannon {
         AffineTransform af = new AffineTransform();
 
         if (img != null) {
+            af.translate((x_position - anchorx), (y_position - anchory));
             af.rotate(Math.toRadians(angle), anchorx, anchory);
-            g2d.translate((x_position - anchorx), (y_position - anchory));
             g2d.drawImage(img, af, null);
         } else {
             g2d.setColor(Color.BLUE);
             g2d.drawString("Unable to load image!", 25, 25);
         }
 
+        // use integer values for this part.
+        int x_pos = (int) x_position;
+        int y_pos = (int) y_position;
+
         g2d.setColor(Color.PINK);
-        g2d.fillPolygon(new int[] { -15, 15, 45 }, new int[] { 65, anchory, 65 }, 3);
+        g2d.fillPolygon(new int[] { x_pos, x_pos - 45 / 2, x_pos + 45 / 2 },
+                new int[] { y_pos, y_pos + 65 / 2, y_pos + 65 / 2 }, 3);
         g2d.setColor(Color.BLACK);
-        g2d.drawPolygon(new int[] { -15, 15, 45 }, new int[] { 65, anchory, 65 }, 3);
+        g2d.drawPolygon(new int[] { x_pos, x_pos - 45 / 2, x_pos + 45 / 2 },
+                new int[] { y_pos, y_pos + 65 / 2, y_pos + 65 / 2 }, 3);
 
         int radius = 10;
         g2d.setColor(Color.BLUE);
-        g2d.fillOval(anchorx - (radius / 2), anchory - (radius / 2), radius, radius);
+        g2d.fillOval(x_pos - (radius / 2), y_pos - (radius / 2), radius, radius);
+
     }
 
 }
