@@ -20,8 +20,8 @@ public class Board extends JPanel implements KeyListener {
     private final int INITIAL_DELAY = 100;
     private final int PERIOD_INTERVAL = 25;
 
-    private Cannon cannon = new Cannon();
-    Cannonball ball = new Cannonball(1, 1, FLOOR);
+    private Cannon cannon;
+    Cannonball ball;
 
     /*
      * Constructor
@@ -33,6 +33,12 @@ public class Board extends JPanel implements KeyListener {
 
         this.setFocusable(true);
         this.addKeyListener(this);
+
+        cannon = new Cannon();
+        cannon.setXPos(60);
+        cannon.setYPos(B_HEIGHT - 60);
+
+        ball = new Cannonball(0, 1, FLOOR);
 
         timer = new Timer();
         timer.scheduleAtFixedRate(new ScheduledUpdate(),
@@ -53,8 +59,6 @@ public class Board extends JPanel implements KeyListener {
         g2d.fillRect(0, FLOOR + 1, B_WIDTH, FLOOR);
         // AffineTransform af = new AffineTransform();
 
-        cannon.setXPos(60);
-        cannon.setYPos(B_HEIGHT - 60);
         cannon.draw(g);
         ball.draw(g2d);
     }

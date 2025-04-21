@@ -16,7 +16,7 @@ class Cannon {
     private double x_position;
     private double y_position;
     double angle;
-    private double muzzleVelocity = 100;
+    private double muzzleVelocity = 30;
     private int rotationFactor = 1; // changes how easy it is (how fast it is) to rotate cannon.
     private final double HYPOT = 100;
 

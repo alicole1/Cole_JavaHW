@@ -1,5 +1,6 @@
 package animate;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -37,6 +38,7 @@ public class Cannonball {
         this.ax = ax;
         this.ay = ay;
         this.ground = ground;
+        timeScale = 1;
     }
 
     private BufferedImage loadImage(String path) {
@@ -60,12 +62,14 @@ public class Cannonball {
      * (since we assume the ball is hidden inside the cannon).
      */
     public void draw(Graphics2D g2d) {
-        if (currState == STATE.FLYING) {
-            g2d.fillOval((int) x - 3, (int) y - 3, 6, 6);
-        } else if (currState == STATE.EXPLODING) {
-            g2d.translate(x, ground);
-            g2d.drawImage(img, null, null);
-        }
+        g2d.setColor(Color.RED);
+        g2d.fillOval((int) x - 10, (int) y - 10, 20, 20);
+        // if (currState == STATE.FLYING) {
+
+        // } else if (currState == STATE.EXPLODING) {
+        // g2d.translate(x, ground);
+        // g2d.drawImage(img, null, null);
+        // }
     }
 
     /*
@@ -79,14 +83,16 @@ public class Cannonball {
      * in case the user wants to slow down the animation.
      */
     public void updateBall() {
-        if (currState == STATE.FLYING) {
-            x = x + (vx / timeScale);
-            vy = vy + (ay / timeScale);
-            y = y + (vy / timeScale);
-        }
-
         if (y > ground) {
             currState = STATE.EXPLODING;
+            System.out.println(currState);
+        } else if (currState == STATE.FLYING) {
+            x = x + (vx / timeScale);
+            System.out.println("x = " + x);
+            vy = vy + (ay / timeScale);
+            System.out.println("vy = " + vy);
+            y = y + (vy / timeScale);
+            System.out.println("y = " + y);
         }
     }
 
@@ -97,10 +103,15 @@ public class Cannonball {
      */
     public void launch(double x, double y, double vx, double vy) {
         currState = STATE.FLYING;
+        System.out.println("Flying!");
         this.x = x;
+        System.out.println(this.x);
         this.y = y;
+        System.out.println(this.y);
         this.vx = vx;
+        System.out.println(this.vx);
         this.vy = vy;
+        System.out.println(this.vy);
     }
 
     /*
