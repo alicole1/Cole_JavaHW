@@ -20,8 +20,6 @@ class Cannon {
     private int rotationFactor = 1; // changes how easy it is (how fast it is) to rotate cannon.
     private final double HYPOT = 100;
 
-    Cannonball cannonball = new Cannonball(1, -1, 0);
-
     enum State {
         POSITIONING,
         FIRING,
@@ -73,8 +71,13 @@ class Cannon {
         }
     }
 
-    public void fire() {
+    public void fire(Cannonball cannonball) {
         fireSound.play();
+        double offsetX = Math.cos(Math.toRadians(angle)) * HYPOT;
+        double offsetY = Math.sin(Math.toRadians(angle)) * HYPOT;
+        double velocityX = Math.cos(Math.toRadians(angle)) * muzzleVelocity;
+        double velocityY = Math.sin(Math.toRadians(angle)) * muzzleVelocity;
+        cannonball.launch(x_position + offsetX, y_position - offsetY, velocityX, velocityY);
     }
 
     // sets x position of the ANCHOR.

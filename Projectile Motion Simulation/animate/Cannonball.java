@@ -96,6 +96,11 @@ public class Cannonball {
      * with the inital velocity of (vx, vy).
      */
     public void launch(double x, double y, double vx, double vy) {
+        currState = STATE.FLYING;
+        this.x = x;
+        this.y = y;
+        this.vx = vx;
+        this.vy = vy;
     }
 
     /*

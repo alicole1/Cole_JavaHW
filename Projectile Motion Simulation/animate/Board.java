@@ -57,7 +57,7 @@ public class Board extends JPanel implements KeyListener {
         cannon.setXPos(60);
         cannon.setYPos(B_HEIGHT - 60);
         cannon.draw(g);
-
+        ball.draw(g2d);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class Board extends JPanel implements KeyListener {
         // was the space key pressed?
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             System.out.println("Spacebar was pressed.");
-            cannon.fire();
+            cannon.fire(ball);
         }
 
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -106,7 +106,7 @@ public class Board extends JPanel implements KeyListener {
          */
         @Override
         public void run() {
-
+            ball.updateBall();
             repaint();
         }
     }
